@@ -64,21 +64,6 @@ public class Main {
             Utils.putResultsOnTeams(results,objects);
             Collections.sort(objects);
             Utils.displayRaking(objects,competitionName);
-
-
-            /*for (int i=0;i< objects.size();i++){
-                System.out.println((i+1)+") "+objects.get(i).getName()+" "+objects.get(i).getPoints()+"p,"+objects.get(i).getNrOfMatch()+"g ("
-                                  +objects.get(i).getNrOfWins()+"-"+objects.get(i).getNrOfDraws()+"-"
-                                  +objects.get(i).getNrOfLooses()+"), "+ objects.get(i).getGoalDifference()+"gd ("
-                                  +objects.get(i).getGoalScore()+"-"+objects.get(i).getGoalsConceded()+")");
-            }*/
-
-
-
     }
-
-
-
-
 }
 

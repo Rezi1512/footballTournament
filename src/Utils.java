@@ -3,19 +3,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Utils {
-    public static boolean checkIfResultInputsAreOk(String result) {
 
+
+    public static boolean checkIfResultInputsAreOk(String result) {
         String goal1 = find1Goals(result);
         String goal2 = find2Goal(result);
-
         if (checkIfGoalsAreOk(goal1) && checkIfGoalsAreOk(goal2)) {
             return true;
         } else {
             return false;
         }
-
     }
-
 
     public static boolean checkIfGoalsAreOk(String goal) {
         int goals = Integer.parseInt(goal);
@@ -35,13 +33,11 @@ public class Utils {
                 break;
             }
         }
-
         for (int i = beginIndex; i < result.length(); i++) {
             if (result.charAt(i) == '@') {
                 endIndex = i;
             }
         }
-
         String goal1 = result.substring(beginIndex, endIndex);
         return goal1;
     }
@@ -54,13 +50,11 @@ public class Utils {
                 beginIndex = i + 1;
             }
         }
-
         for (int i = beginIndex; i < result.length(); i++) {
             if (result.charAt(i) == '#') {
                 endIndex = i;
             }
         }
-
         String goal2 = result.substring(beginIndex, endIndex);
         return goal2;
     }
@@ -70,7 +64,6 @@ public class Utils {
         String team2 = "";
         int beginIndex = 0;
         int endIndex = 1;
-
         for (int i = 0; i < result.length(); i++) {
             if (result.charAt(i) == '#') {
                 endIndex = i;
@@ -221,7 +214,6 @@ public class Utils {
 
     }
 
-
     public static void displayRaking(List<Team> objects,String name){
         System.out.println(name);
         for (int i=0;i< objects.size();i++){
@@ -230,10 +222,6 @@ public class Utils {
                     +objects.get(i).getNrOfLooses()+"), "+ objects.get(i).getGoalDifference()+"gd ("
                     +objects.get(i).getGoalScore()+"-"+objects.get(i).getGoalsConceded()+")");
         }
-    }
-
-    public static void rankTeams(List<Team>teams){
-
     }
 
 

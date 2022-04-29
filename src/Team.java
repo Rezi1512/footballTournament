@@ -1,13 +1,13 @@
 public class Team implements Comparable<Team>{
    private String name;
-   private int points = 0;
-   private int nrOfMatch = 0;
-   private int nrOfWins = 0;
-   private int nrOfLooses = 0;
-   private int nrOfDraws = 0;
-   private int goalsConceded = 0;
-   private int goalDifference = 0;
-   private int goalScore = 0;
+   private int points;
+   private int nrOfMatch;
+   private int nrOfWins;
+   private int nrOfLooses;
+   private int nrOfDraws;
+   private int goalsConceded;
+   private int goalDifference;
+   private int goalScore;
 
    public void setName(String name){
        this.name=name;
@@ -114,8 +114,6 @@ public class Team implements Comparable<Team>{
         } else {
             return 1;
         }
-
-
     }
 
 

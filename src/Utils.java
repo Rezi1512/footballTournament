@@ -4,25 +4,76 @@ import java.util.Scanner;
 
 public class Utils {
 
+    public static void takeInputsFromUser(String competitionName,ArrayList<String> results,
+                                          ArrayList<Team> objects) throws Exception {
+
+        Scanner input = new Scanner(System.in);
+
+        int nr = input.nextInt();
+        if (nr < 0 || nr > 1000) {
+            throw new Exception("input i papershtatshem");
+        }
+
+        System.out.println("Jepni emrin e kompeticionit");
+        Scanner input1 = new Scanner(System.in);
+        competitionName = input1.nextLine();
+        if (competitionName == null || competitionName.length() > 100) {
+            throw new Exception("emri i kompeticionit jo i pershtatshem");
+        }
+
+        System.out.println("Jepni numrin e ekipeve");
+        int numberOfTeams = input.nextInt();
+        if (numberOfTeams <= 1 || numberOfTeams > 30) {
+            throw new Exception("numer i papershtatshem ekipesh");
+        }
+
+        ArrayList<String> teams = new ArrayList();
+        for (int i = 0; i < numberOfTeams; i++) {
+            System.out.println("Jepni emrin e ekipit");
+            String team = input.next();
+            if (team.contains("@") || team.contains("#")) {
+                throw new Exception("emri i ekipit i papershtatshem");
+            } else {
+                teams.add(team);
+            }
+        }
+
+        for (int i=0;i<teams.size();i++){
+            Team  team =new Team();
+            team.setName(teams.get(i));
+            objects.add(team);
+        }
+
+        System.out.println("Jepni numrin e ndeshjeve");
+        int numberOfMatchesPlayed = input.nextInt();
+        if (numberOfMatchesPlayed < 0 || numberOfMatchesPlayed > 1000) {
+            throw new Exception("numri i ndeshjeve i papershtatshem");
+        }
+
+        for (int i = 0; i < numberOfMatchesPlayed; i++) {
+            System.out.println("Jepni rezultatin e ndeshjeve");
+            String a = input.next();
+            if (Utils.checkIfResultInputsAreOk(a)) {
+                results.add(a);
+            } else {
+                throw new Exception("Result is invalid");
+            }
+        }
+    }
+
 
     public static boolean checkIfResultInputsAreOk(String result) {
         String goal1 = find1Goals(result);
         String goal2 = find2Goal(result);
-        if (checkIfGoalsAreOk(goal1) && checkIfGoalsAreOk(goal2)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (checkIfGoalsAreOk(goal1) && checkIfGoalsAreOk(goal2));
     }
+
 
     public static boolean checkIfGoalsAreOk(String goal) {
         int goals = Integer.parseInt(goal);
-        if (goals >= 0 && goals < 20) {
-            return true;
-        } else {
-            return false;
-        }
+        return  (goals >= 0 && goals < 20);
     }
+
 
     public static String find1Goals(String result) {
         int beginIndex = 0;
@@ -42,6 +93,7 @@ public class Utils {
         return goal1;
     }
 
+
     public static String find2Goal(String result) {
         int beginIndex = 0;
         int endIndex = 1;
@@ -58,6 +110,7 @@ public class Utils {
         String goal2 = result.substring(beginIndex, endIndex);
         return goal2;
     }
+
 
     public static String findWichTeamHasWon(String result) {
         String team1 = "";
@@ -86,12 +139,11 @@ public class Utils {
         }
     }
 
+
     public static boolean areTeamsEqual(String result) {
-        if (Integer.parseInt(find1Goals(result)) == Integer.parseInt(find2Goal(result))) {
-            return true;
-        }
-        return false;
+        return  (Integer.parseInt(find1Goals(result)) == Integer.parseInt(find2Goal(result)));
     }
+
 
     public static String find1Team(String result) {
         int beginIndex = 0;
@@ -106,6 +158,7 @@ public class Utils {
         firstTeam = result.substring(beginIndex, endIndex);
         return firstTeam;
     }
+
 
     public static String find2Team(String result) {
         int beginIndex = 0;
@@ -124,6 +177,7 @@ public class Utils {
         secondTeam = result.substring(beginIndex);
         return secondTeam;
     }
+
 
     public static void putResultsOnTeams(List<String> results, List<Team> objects) {
         for (int i = 0; i < results.size(); i++) {
@@ -164,7 +218,6 @@ public class Utils {
 
                         }
                     }
-
                     for (int a = 0; a < objects.size(); a++) {
                         if (objects.get(a).getName().equals(losingTeam)) {
                             objects.get(a).setPoints(objects.get(a).getPoints() + 0);
@@ -176,7 +229,6 @@ public class Utils {
 
                         }
                     }
-
                 } else {
                     String winingTeam = secondTeam;
                     String losingTeam = firstTeam;
@@ -191,10 +243,8 @@ public class Utils {
                             objects.get(b).setNrOfMatch(objects.get(b).getNrOfMatch() + 1);
                             objects.get(b).setNrOfWins(objects.get(b).getNrOfWins() + 1);
                             objects.get(b).setGoalDifference(objects.get(b).getGoalDifference() + (goalOfSecondTeam - goalOfFirstTeam));
-
                         }
                     }
-
                     for (int c = 0; c < objects.size(); c++) {
                         if (objects.get(c).getName().equals(losingTeam)) {
                             objects.get(c).setPoints(objects.get(c).getPoints() + 0);
@@ -208,13 +258,12 @@ public class Utils {
                     }
                 }
             }
-
-
         }
 
     }
 
-    public static void displayRaking(List<Team> objects,String name){
+
+    public static void displayRanking(List<Team> objects, String name){
         System.out.println(name);
         for (int i=0;i< objects.size();i++){
             System.out.println((i+1)+") "+objects.get(i).getName()+" "+objects.get(i).getPoints()+"p,"+objects.get(i).getNrOfMatch()+"g ("
